@@ -1,4 +1,4 @@
-import csv
+import pandas as pd
 
 
 def read_csv(file: str, category: str):
@@ -11,54 +11,44 @@ def read_csv(file: str, category: str):
         Returns: Nothing 
     """
     folder = f"data/{category}/hola/{category}"
-    f = open(f"{folder}/{file}", encoding="utf-8")
-    reader = csv.reader(f)
+    reader = pd.read_csv(f'{folder}/{file}')
 
-    
-    # Appends first line of csv
-    data = []
+    rename_columns = {
+        'Cod_Loc': 'cod_localidad',
+    'IdProvincia': 'id_provincia',
+    'IdDepartamento':'id_departamento',
+    'cod_loc': 'cod_localidad',
+    'idprovincia': 'id_provincia',
+    'iddepartamento':'id_departamento',
+    'Categoría':'categoria',
+    'Provincia':'provincia',
+    'Localidad':'localidad',
+    'Nombre':'nombre',
+    'Domicilio':'domicilio',
+    'Dirección':'domicilio',
+    'direccion':'domicilio',
+    'CP':'codigo_postal',
+    'Teléfono':'num_telefono',
+    'telefono':'num_telefono',
+    'Mail':'mail',
+    'Web':'web'
+    }
 
-    cod_localidad = "cod_localidad"
-    id_provincia = "id_provincia"
-    id_departamento = "id_departamento"
-    categoria = "categoria"
-    provincia = "provincia"
-    localidad = "localidad"
-    nombre = "nombre"
-    domicilio = "domicilio"
-    codigo_postal = "codigo_postal"
-    num_telefono = "num_telefono"
-    mail = "mail"
-    web = "web"
+    reader.rename(columns=rename_columns, inplace=True)
 
-    header_list = [cod_localidad,id_provincia,id_departamento,
-                    categoria, provincia, localidad, nombre, domicilio,
-                    codigo_postal, num_telefono, mail, web]
-    
-    data.append(header_list) # First line
 
-    header = next(reader)  #jump first line of reader
+    columns = ["cod_localidad", 
+    "id_provincia", 
+    "id_departamento", 
+    "categoria", 
+    "provincia", 
+    "localidad", 
+    "nombre", 
+    "domicilio", 
+    "codigo_postal", 
+    "num_telefono",
+    "mail", 
+    "web"]
 
-    print(data)
-    for row in reader:
-        # Row = [cod_localidad, id_provincia, id_departamento, categoria, provincia, localidad, nombre, domicilio, codigo_postal, num_telefono, mail, web]
-        cod_localidad = str(row[0])
-        id_provincia = int(row[1])
-        id_departamento = int(row[2])
-        categoria = str(row[4])
-        provincia = str(row[6])
-        localidad = str(row[7])
-        nombre = str(row[8])
-        domicilio = str(row[9])
-        codigo_postal = str(row[11])
-        num_telefono = str(row[13])
-        mail = str(row[14])
-        web = str(row[15])
-
-        data.append([cod_localidad, id_provincia, id_departamento,
-                     categoria, provincia, localidad, nombre, 
-                     domicilio, codigo_postal, num_telefono,
-                     mail, web])
-
-    print(data)
+    return(reader[columns])
 
