@@ -1,29 +1,30 @@
 import os
 
-from urllib.request import Request, urlopen
+import requests
+
+import datetime
 
 
-
-
-def download_csv(url:str, file:str, category:str):
+def download_csv(url:str, category:str):
     """Downloads a file and saves it with the name you want
     in the next path: data/{category}/{}/{file}
     
     Args:
         url (str): url of the file you want to download
-        file (str): name of the file you want to save
         category (str): name of category you want
     
     Returns: Nothing
     """
-    folder = f"data/{category}/hola/{category}"
+
+    months = ("enero", "febrero", "marzo", "abri", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre")
+    months = months[datetime.date.today().month - 1]
+    date = datetime.datetime.now().strftime('%d-%m-%Y')
+    folder = f"{category}/{datetime.date.today().year}-{months}"
     if not os.path.exists(folder):
         os.makedirs(folder)
-    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    webpage = urlopen(req).read()
-    f = open(f"{folder}/{file}", "wb+")
-    f.write(webpage)
+
+    req = requests.get(url, auth=("user", "pass"))
+    content = req.content
+    f = open(f"{folder}/{category}-{date}.csv", "wb+")
+    f.write(content)
     f.close
-
-
-museo_url = "https://datos.cultura.gob.ar/dataset/37305de4-3cce-4d4b-9d9a-fec3ca61d09f/resource/4207def0-2ff7-41d5-9095-d42ae8207a5d/download/museo.csv"

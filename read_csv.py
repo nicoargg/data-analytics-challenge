@@ -1,17 +1,21 @@
+#pandas
 import pandas as pd
+#datetime
+import datetime
 
-
-def read_csv(file: str, category: str):
+def read_csv(category: str):
     """Reads csv file with the path: "data/{category}/hola/{category}"
         
         Args:
-            file (str): name of the csv file you want to read
             category (str): name of the category of the file
 
-        Returns: Nothing 
+        Returns: a pandas table
     """
-    folder = f"data/{category}/hola/{category}"
-    reader = pd.read_csv(f'{folder}/{file}')
+    months = ("enero", "febrero", "marzo", "abri", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre")
+    months = months[datetime.date.today().month - 1]
+    date = datetime.datetime.now().strftime('%d-%m-%Y')
+    folder = f"{category}/{datetime.date.today().year}-{months}"
+    reader = pd.read_csv(f'{folder}/{category}-{date}.csv')
 
     rename_columns = {
         'Cod_Loc': 'cod_localidad',
