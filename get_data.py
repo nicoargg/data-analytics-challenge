@@ -6,8 +6,9 @@ import datetime
 
 
 def download_csv(url:str, category:str):
-    """Downloads a file and saves it with the name you want
-    in the next path: data/{category}/{}/{file}
+    """Downloads a file and saves it as .csv with 
+    the next path: 
+        "./{category}/{this year}-{this month}/{category}-{date}.csv"
     
     Args:
         url (str): url of the file you want to download

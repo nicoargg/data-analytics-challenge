@@ -4,12 +4,15 @@ import pandas as pd
 import datetime
 
 def read_csv(category: str):
-    """Reads csv file with the path: "data/{category}/hola/{category}"
+    """Reads csv file with the path: 
+    "./{category}/{this year}-{this month}/{category}-{date}.csv";
+    and normalize the data
         
-        Args:
-            category (str): name of the category of the file
+    Args:
+        category (str): name of the category of the file
 
-        Returns: a pandas table
+        Returns: a pandas table with normalized data 
+        and another pandas table without normalized data 
     """
     months = ("enero", "febrero", "marzo", "abri", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre")
     months = months[datetime.date.today().month - 1]
@@ -54,5 +57,5 @@ def read_csv(category: str):
     "mail", 
     "web"]
 
-    return(reader[columns])
+    return(reader[columns], reader)
 
