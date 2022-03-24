@@ -10,8 +10,8 @@
 	POSTGRES_DB= "nombre de base de datos"
 	POSTGRES_HOST= "ruta del host (por ejemplo localhost)"
 
-#### Luego ejecutar el archivo main.py desde consola
+#### Luego ejecutar el archivo main.py desde consola para descargar los archivos, leerlos, y guardarlos en la base de datos
 > 	python3 main.py
 
-#### Por último ejecutar scripts.py
+#### Por último ejecutar scripts.py para procesar algunos datos y crear tablas extras
 > 	python3 scripts.py

@@ -21,6 +21,8 @@ def download_csv(url:str, category:str):
     months = months[datetime.date.today().month - 1]
     date = datetime.datetime.now().strftime('%d-%m-%Y')
     folder = f"{category}/{datetime.date.today().year}-{months}"
+
+    # If folder's path doesn't exist, it is created
     if not os.path.exists(folder):
         os.makedirs(folder)
 
