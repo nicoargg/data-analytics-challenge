@@ -28,6 +28,8 @@ def download_csv(url:str, category:str):
 
     req = requests.get(url, auth=("user", "pass"))
     content = req.content
-    f = open(f"{folder}/{category}-{date}.csv", "wb+")
-    f.write(content)
-    f.close
+    try:
+        f = open(f"{folder}/{category}-{date}.csv", "wb+")
+        f.write(content)
+    finally:
+        f.close()

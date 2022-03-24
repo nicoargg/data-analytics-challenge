@@ -59,26 +59,27 @@ def main(username:str, password:str, database_name:str, host:str):
     # Conection to Database
     engine = create_engine(f'postgresql://{username}:{password}@{host}/{database_name}')
 
-    c = engine.connect()
-    logger.debug("# Conexión con base de datos exitosa")
+    try:
+        c = engine.connect()
+        logger.debug("# Conexión con base de datos exitosa")
 
 
-    # Saving not normalized tables in database
-    not_normalized_biblioteca.to_sql("bibliotecas", con = engine, if_exists='replace')
-    logger.debug("# Tabla 'bibliotecas' en base de datos Creada")
+        # Saving not normalized tables in database
+        not_normalized_biblioteca.to_sql("bibliotecas", con = engine, if_exists='replace')
+        logger.debug("# Tabla 'bibliotecas' en base de datos Creada")
 
-    not_normalized_cine.to_sql("cines", con = engine, if_exists='replace')
-    logger.debug("# Tabla 'cines' en base de datos Creada")
+        not_normalized_cine.to_sql("cines", con = engine, if_exists='replace')
+        logger.debug("# Tabla 'cines' en base de datos Creada")
 
-    not_normalized_museo.to_sql("museos", con = engine, if_exists='replace')
-    logger.debug("# Tabla 'museos' en base de datos Creada")
+        not_normalized_museo.to_sql("museos", con = engine, if_exists='replace')
+        logger.debug("# Tabla 'museos' en base de datos Creada")
 
 
-    # Saving the normalized table in database
-    all_data.to_sql("tabla_completa", con= engine, if_exists="replace")
-    logger.debug("# Tabla con todos los datos Creada")
-    
-    c.close()
+        # Saving the normalized table in database
+        all_data.to_sql("tabla_completa", con= engine, if_exists="replace")
+        logger.debug("# Tabla con todos los datos Creada")
+    finally:
+        c.close()
 
 if __name__ == '__main__':
     main(config('POSTGRES_USER'), config('POSTGRES_PASSWORD'), config('POSTGRES_DB'), config('POSTGRES_HOST'))
