@@ -26,8 +26,14 @@ def download_csv(url:str, category:str):
     if not os.path.exists(folder):
         os.makedirs(folder)
 
-    req = requests.get(url, auth=("user", "pass"))
-    content = req.content
+    try:
+        req = requests.get(url, auth=("user", "pass"))
+        if req.status_code == 200:
+            content = req.content
+        else:
+            raise ValueError(f'Error: {req.status_code}')
+    except ValueError as ve:
+        print(ve)
     try:
         f = open(f"{folder}/{category}-{date}.csv", "wb+")
         f.write(content)
