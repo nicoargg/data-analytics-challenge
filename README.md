@@ -1,6 +1,6 @@
 # Data-analytics-challenge
 ## Descripción
-El proyecto descarga 3 archivos en formato .csv desde el data set del ministerio de cultura (https://datos.cultura.gob.ar/dataset), los cuales almacenan los datos de bibliotecas populares, museos y centros culturales. Estos archivos son leídos, y almacenados en tablas diferentes en una base de datos PostgreSQL, luego se normalizan los datos para almacenarlos en una sola tabla.
+El proyecto descarga 3 archivos en formato .csv desde el data set del ministerio de cultura (https://datos.cultura.gob.ar/dataset), los cuales almacenan los datos de bibliotecas populares, museos y centros culturales. Estos archivos son leídos, y guardados en tablas diferentes en una base de datos PostgreSQL, luego estos se normalizan para almacenarlos en una sola tabla.
 
 ## Configuracion
 #### Primero deberás crear un entorno virtual, y ejecutarlo. Luego instalar los requerimientos con:
