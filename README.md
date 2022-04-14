@@ -1,5 +1,5 @@
 # Data-analytics-challenge
-> ### Configuracion
+> # Configuracion
 
 #### Primero deberás crear un entorno virtual, y ejecutarlo. Luego instalar los requerimientos con:
 > 	pip install -r requirements.txt
